@@ -1,5 +1,6 @@
 import { FC } from "react";
-import { Card, Group, Image, Text } from "@mantine/core";
+import { Button, Card, Group, Image, Text } from "@mantine/core";
+import { useNavigate } from "react-router-dom";
 
 interface AppProps {
   product: {
@@ -18,9 +19,10 @@ interface AppProps {
 }
 
 const Product: FC<AppProps> = ({ product }) => {
+  const nav = useNavigate();
   return (
     <div style={{ width: 340, margin: "auto" }}>
-      <Card shadow="xl" p="xl">
+      <Card onClick={() => nav(`product/${product.id}`)} shadow="xl" p="xl">
         {/*<Card.Section>*/}
         <Image src={product.images[0]} />
         {/*</Card.Section>*/}
