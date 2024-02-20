@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Button, Card, Group, Image, Text } from "@mantine/core";
+import { Card, Group, Image, Text } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 
 interface AppProps {
