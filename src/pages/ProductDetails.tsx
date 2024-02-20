@@ -1,14 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { api } from "../api/request.tsx";
-import {
-  ActionIcon,
-  Button,
-  Card,
-  Container,
-  Image,
-  Text,
-} from "@mantine/core";
+import { ActionIcon, Card, Container, Image, Text } from "@mantine/core";
 import "../style/productDetails.sass";
 import { ChevronLeft, ChevronRight } from "tabler-icons-react";
 
@@ -18,7 +11,7 @@ interface AppProduct {
   description?: string;
   discountPercentage?: number;
   id?: number;
-  images?: [index: string];
+  images: string[];
   price?: number;
   rating?: number;
   stock?: number;
@@ -28,7 +21,7 @@ interface AppProduct {
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const [isProduct, setProduct] = useState<AppProduct>({});
+  const [isProduct, setProduct] = useState<AppProduct>({ images: [""] });
   const [isImg, setImg] = useState<string>("");
   useEffect(() => {
     const fetchProduct = async () => {
@@ -41,16 +34,15 @@ const ProductDetails = () => {
 
   const changeImg = (b: boolean): void => {
     const idImg = isProduct.images?.findIndex((el) => el === isImg);
-    let length = isProduct.images?.length;
     console.log(idImg, b, length);
     if (b) {
       if (0 === idImg) {
-        setImg(isProduct.images[length - 1]);
+        setImg(isProduct.images[isProduct.images?.length - 1]);
         return;
       }
       setImg(isProduct.images[idImg - 1]);
     } else {
-      if (length - 1 === idImg) {
+      if (isProduct.images?.length - 1 === idImg) {
         setImg(isProduct.images[0]);
         return;
       }
